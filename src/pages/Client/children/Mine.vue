@@ -7,6 +7,7 @@
           <span>当前认证：{{user.iswriter|iswriter}}</span>
         </div>
         <div v-if="user.iswriter===1" class="btn" @click="addBook=true">添加新书入库>></div>
+        <div v-if="user.iswriter===undefined" class="btn" @click="$router.push('/')">前往登录>></div>
       </div>
       <el-divider>我的作品</el-divider>
       <ul v-if="user.iswriter===1" class="cell_list">
@@ -169,9 +170,12 @@ export default {
         url: `${process.env.VUE_APP_API}/userInfo`,
         method: "get"
       }).then(res => {
-        console.log(res);
         this.user = res
-      });
+      }).catch(error=>{
+        this.user = {
+          username:'未登录'
+        }
+      })
     }
   },
   filters:{
@@ -180,8 +184,10 @@ export default {
         return '作者'
       }else if(val === -1){
         return '普通用户'
-      }else{
+      }else if(val === 0){
         return '审核中'
+      }else{
+        return '未登录'
       }
     }
   }

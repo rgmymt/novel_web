@@ -110,7 +110,7 @@ export default {
       }).then(res => {
         console.log(res);
         this.user = res
-      });
+      })
     },
   },
   filters:{
@@ -119,8 +119,10 @@ export default {
         return '作者'
       }else if(val === -1){
         return '普通用户'
-      }else{
+      }else if(val === 0){
         return '审核中'
+      }else{
+        return '未登录'
       }
     }
   },

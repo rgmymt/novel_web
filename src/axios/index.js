@@ -47,7 +47,7 @@ service.interceptors.response.use(
         case 403: tip('拒绝访问'); break
         case 404: tip(`请求地址出错: ${error.response.config.url}`); break
         case 408: tip('请求超时'); break
-        case 500: tip('服务器内部错误'); break
+        // case 500: tip('服务器内部错误'); break
         case 501: tip('服务未实现'); break
         case 502: tip('网关错误'); break
         case 503: tip('服务不可用'); break
