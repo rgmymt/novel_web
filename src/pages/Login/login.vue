@@ -112,15 +112,15 @@ export default {
             this.$message.error('验证码错误')
             return
         }
-        if(this.username === 'admin'){
-          if(this.password==='admin'){
-            this.$router.push('/manage')
-            return
-          }else{
-            this.$message.error('密码错误')
-            return
-          }
-        }
+        // if(this.username === 'admin'){
+        //   if(this.password==='admin'){
+        //     this.$router.push('/manage')
+        //     return
+        //   }else{
+        //     this.$message.error('密码错误')
+        //     return
+        //   }
+        // }
         const formData = new FormData();
         formData.append("username", this.username);
         formData.append("password", this.password);
@@ -130,7 +130,11 @@ export default {
           data: formData
         }).then(res => {
           if (res.type === "success") {
-            this.$router.push({ path: "/client" })
+            if(this.username === 'admin'){
+              this.$router.push('/manage')        
+            }else{
+              this.$router.push({ path: "/client" })
+            }
           } else {
             this.$message.error(res.msg);
           }
