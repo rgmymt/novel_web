@@ -11,6 +11,8 @@ import News from '../pages/Client/children/News'
 import Activity from '../pages/Client/children/Activity'
 import Post from '../pages/Client/children/Post'
 import Mine from '../pages/Client/children/Mine'
+import Collent from '../pages/Client/children/Collent'
+
 //管理端
 import Manage from '@/pages/Manage/index'
 import novelManage from '../pages/Manage/children/novelManage'
@@ -100,6 +102,10 @@ export default new Router({
 				{
 					path:'post',
 					component: Post,
+				},
+				{
+					path:'collent',
+					component: Collent,
 				},
 				{
 					path:'mine',

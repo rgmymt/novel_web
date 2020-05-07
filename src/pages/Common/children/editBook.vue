@@ -73,6 +73,11 @@ export default {
     this.getChapterList();
   },
   methods: {
+    startRead(item) {
+      let info = item
+      info.author = this.info.writername
+      this.$router.push({ path: "/common/chapterDetail", query: { info: item } });
+    },
     getChapterList() {
       this.$request({
         url: `${process.env.VUE_APP_API}/chapter/getAll`,

@@ -12,13 +12,19 @@
         ></el-option>
       </el-select>
       </div>
-      <el-divider>{{tagName===''?'推荐':tagName}}</el-divider>
+      <!-- <el-divider>{{tagName===''?'推荐':tagName}}</el-divider> -->
       <ul class="cell_list">
         <li v-for="(item,index) in bookList" :key="index" @click="lookBook(item)">
           <div class="line">
             <div class="line_left">
               <div class="title">
               {{item.novelname?('《 '+item.novelname+' 》'):''}}
+              <!-- <el-tag effect="plain" size="mini">{{ item.typename }}</el-tag> -->
+              </div>
+              <div class="detail">
+                <div class="time">{{'作者：'+item.writername }}</div>
+                <div class="poster">{{'阅读量：'+item.readdata }}</div>
+                <div class="poster">{{'点赞量：'+item.likedata}}</div>
               </div>
             </div>
           </div>
@@ -44,7 +50,7 @@ export default {
       tagList:[],
       bookList:[],
       page: 1,
-      size: 8
+      size: 5
     };
   },
   created() {
@@ -89,6 +95,7 @@ export default {
       });
 		},
 		tagChange() {
+      this.page = 1
       if(this.tagName === ''){
         this.getRecommedList()
       }else{
@@ -156,7 +163,7 @@ export default {
       padding: 0 30px;
       margin: 0px;
       overflow-y: auto;
-      height: calc(100% - 115px);
+      height: calc(100% - 90px);
       .none-notice {
         line-height: 60px;
         text-align: center;

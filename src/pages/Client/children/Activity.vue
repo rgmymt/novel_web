@@ -140,6 +140,7 @@ export default {
     border-radius: 10px;
     //width: 100%;
     height: 450px;
+    box-sizing: border-box;
     .creat_post {
       cursor: pointer;
       margin-top: 10px;
@@ -155,7 +156,7 @@ export default {
       padding: 0 10px;
       margin: 0px;
       overflow-y: auto;
-      height: calc(100% - 45px);
+      height: calc(100% - 65px);
       .none-notice {
         line-height: 60px;
         text-align: center;

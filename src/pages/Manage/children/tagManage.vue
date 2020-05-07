@@ -26,7 +26,7 @@
           >取消</el-button>
         </div>
       </div>
-      <el-table height="90%" :data="tagList" tooltip-effect="dark" style="width: 100%;" stripe>
+      <el-table height="90%" :data="tagList" tooltip-effect="dark" style="width: 100%;" :row-class-name="tableRowClassName">
         <el-table-column label="ID" type="index" width="55"></el-table-column>
         <el-table-column prop="typename" label="标签名称"></el-table-column>
         <el-table-column prop="createtime" label="创建时间" width="180"></el-table-column>
@@ -115,7 +115,13 @@ export default {
         this.$message.success("标签已删除");
         this.gettagList();
       })
-    }
+    },
+    tableRowClassName({row, rowIndex}) {
+        if (rowIndex%2 === 1) {
+          return 'background-row';
+        }
+        return '';
+      }
   }
 };
 </script>
@@ -139,6 +145,9 @@ export default {
       bottom: 5px;
       right: 10px;
       left: 10px;
+    }
+    /deep/.el-table .background-row{
+       background: rgba(103, 106, 129, 0.1);
     }
     .addLine {
       display: flex;

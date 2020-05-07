@@ -8,7 +8,7 @@
       <el-breadcrumb-item>活动管理</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="mainbox">
-      <el-table :data="activityList" tooltip-effect="dark" style="width: 100%;height: 90%;" stripe>
+      <el-table :data="activityList" tooltip-effect="dark" style="width: 100%;height: 90%;" :row-class-name="tableRowClassName">
         <el-table-column label="ID" type="index" width="55"></el-table-column>
         <el-table-column prop="acttitle" label="活动名称"></el-table-column>
         <el-table-column prop="organizer" label="组织者" width="120"></el-table-column>
@@ -100,6 +100,12 @@ export default {
         this.$router.push({path:'/common/activityDetail',query:{info:JSON.stringify(res[0])}})
       })
     },
+    tableRowClassName({row, rowIndex}) {
+        if (rowIndex%2 === 1) {
+          return 'background-row';
+        }
+        return '';
+      }
   },
   created() {
     this.getactivityList()
@@ -117,7 +123,10 @@ export default {
     padding-bottom: 30px;
 		border-radius: 10px;
 		height: calc(100vh - 194px);
-		box-sizing: border-box;
+    box-sizing: border-box;
+    /deep/.el-table .background-row{
+       background: rgba(103, 106, 129, 0.1);
+    }
 		/deep/.el-select{
 			width: 30%;
 		}

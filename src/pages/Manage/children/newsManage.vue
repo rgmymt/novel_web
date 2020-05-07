@@ -38,7 +38,7 @@
         :data="newsList"
         tooltip-effect="dark"
         style="width: 100%;height: 90%;"
-        stripe
+        :row-class-name="tableRowClassName"
       >
         <el-table-column label="ID" type="index" width="55" show-overflow-tooltip></el-table-column>
         <el-table-column prop="newstitle" label="通知标题" show-overflow-tooltip></el-table-column>
@@ -116,6 +116,10 @@ export default {
         this.addNews = false
         this.$message.success("新增成功");
         this.getnewsList();
+        this.news={
+          newsTitle: "",
+          newsContent: ""
+        }
       });
     },
     lookNews(item) {
@@ -133,6 +137,12 @@ export default {
       this.page = val;
       this.getnewsList();
     },
+    tableRowClassName({row, rowIndex}) {
+        if (rowIndex%2 === 1) {
+          return 'background-row';
+        }
+        return '';
+      }
   }
 };
 </script>
@@ -148,6 +158,9 @@ export default {
     border-radius: 10px;
     height: calc(100vh - 194px);
     box-sizing: border-box;
+    /deep/.el-table .background-row{
+       background: rgba(103, 106, 129, 0.1);
+    }
     /deep/.el-select {
       width: 30%;
     }

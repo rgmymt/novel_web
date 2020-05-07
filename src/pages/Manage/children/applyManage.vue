@@ -8,7 +8,7 @@
       <el-breadcrumb-item>审核中心</el-breadcrumb-item>
     </el-breadcrumb>
     <div class="mainbox">
-      <el-table :data="applyList" tooltip-effect="dark" style="width: 100%;height: 90%;" stripe>
+      <el-table :data="applyList" tooltip-effect="dark" style="width: 100%;height: 90%;" :row-class-name="tableRowClassName">
         <el-table-column label="ID" type="index" width="55"></el-table-column>
         <el-table-column prop="writername" label="申请人"></el-table-column>
         <el-table-column prop="applytime" label="申请时间"></el-table-column>
@@ -97,7 +97,13 @@ export default {
         this.$message.success('申请已驳回');
         this.getapplyList()
       });
-    }
+    },
+    tableRowClassName({row, rowIndex}) {
+        if (rowIndex%2 === 1) {
+          return 'background-row';
+        }
+        return '';
+      }
   },
   created() {
     this.getapplyList()
@@ -115,7 +121,10 @@ export default {
     padding-bottom: 30px;
 		border-radius: 10px;
 		height: calc(100vh - 194px);
-		box-sizing: border-box;
+    box-sizing: border-box;
+    /deep/.el-table .background-row{
+       background: rgba(103, 106, 129, 0.1);
+    }
 		/deep/.el-select{
 			width: 30%;
 		}

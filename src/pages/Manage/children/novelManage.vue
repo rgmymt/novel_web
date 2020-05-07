@@ -17,7 +17,7 @@
           :value="item.value"
         ></el-option>
       </el-select>
-      <el-table :data="novelList" tooltip-effect="dark" style="width: 100%;height: 90%;" stripe>
+      <el-table :data="novelList" tooltip-effect="dark" style="width: 100%;height: 90%;" :row-class-name="tableRowClassName">
         <el-table-column label="ID" type="index" width="55"></el-table-column>
         <el-table-column prop="novelname" label="书名"></el-table-column>
         <el-table-column prop="writername" label="作者" width="120"></el-table-column>
@@ -62,7 +62,7 @@ export default {
       tagList: [],
       novelList: [],
       page: 1, // 当前页
-			size: 10, // 每页条数
+			size: 9, // 每页条数
 			total:0
     };
   },
@@ -138,6 +138,12 @@ export default {
         this.getnovelList();
       });
     },
+    tableRowClassName({row, rowIndex}) {
+        if (rowIndex%2 === 1) {
+          return 'background-row';
+        }
+        return '';
+      }
   },
   created() {
     this.gettagList()
@@ -155,7 +161,10 @@ export default {
     padding-bottom: 30px;
 		border-radius: 10px;
 		height: calc(100vh - 194px);
-		box-sizing: border-box;
+    box-sizing: border-box;
+    /deep/.el-table .background-row{
+       background: rgba(103, 106, 129, 0.1);
+    }
 		/deep/.el-select{
 			width: 30%;
 		}

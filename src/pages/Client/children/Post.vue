@@ -28,7 +28,7 @@
       ></el-pagination>
     </div>
     <!-- 创建帖子弹窗 -->
-    <el-dialog title="发起活动" :visible.sync="addPost" width="50%" center>
+    <el-dialog title="发表新帖" :visible.sync="addPost" width="50%" center>
       <el-form ref="form" :model="postForm" label-width="80px">
         <el-form-item label="标题">
           <el-input v-model="postForm.title"></el-input>
@@ -76,6 +76,7 @@ export default {
     Tabchange(tab, event){
 			console.log(tab, event)
       this.TabType = tab.name
+      this.page = 1
       this.getpostList()
     },
     getpostList() {

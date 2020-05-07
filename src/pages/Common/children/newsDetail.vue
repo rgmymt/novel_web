@@ -52,6 +52,8 @@ export default {
     margin: 20px 60px;
       padding: 0 20px;
       line-height: 40px;
+      white-space: pre-wrap;
+        word-wrap: break-word;
     }
 }
 </style>

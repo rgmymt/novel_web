@@ -17,7 +17,7 @@
           :data="postList"
           tooltip-effect="dark"
           style="width: 100%"
-          stripe
+          :row-class-name="tableRowClassName"
         >
           <el-table-column label="ID" type="index" width="55" show-overflow-tooltip></el-table-column>
           <el-table-column prop="posttitle" label="帖子标题" show-overflow-tooltip></el-table-column>
@@ -116,7 +116,13 @@ export default {
       }).then(res => {
         this.$router.push({ path: "/common/postDetail", query: { info: JSON.stringify(res) } });
       });
-    }
+    },
+    tableRowClassName({row, rowIndex}) {
+        if (rowIndex%2 === 1) {
+          return 'background-row';
+        }
+        return '';
+      }
   },
   created() {
     this.getpostList();
@@ -136,6 +142,9 @@ export default {
     border-radius: 10px;
     height: calc(100vh - 194px);
     box-sizing: border-box;
+    /deep/.el-table .background-row{
+       background: rgba(103, 106, 129, 0.1);
+    }
     /deep/.el-select {
       width: 30%;
     }

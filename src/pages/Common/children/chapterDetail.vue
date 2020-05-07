@@ -34,6 +34,10 @@ export default {
         color: #969799;
         text-align: center;
       }
+      .content{
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
   }
 }
 </style>

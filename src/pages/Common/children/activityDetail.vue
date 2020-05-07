@@ -47,6 +47,8 @@ export default {
     .description{
       padding: 0 20px;
       line-height: 40px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
     }
   }
 }

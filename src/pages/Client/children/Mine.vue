@@ -159,7 +159,16 @@ export default {
       });
     },
     editBook(item){
-      this.$router.push({ path: "/common/editBook" ,query:{info:JSON.stringify(item)}});
+      this.$request({
+        url: `${process.env.VUE_APP_API}/novel/getOne`,
+        method: "get",
+        params: {
+          novelId: item.novelid
+        }
+      }).then(res => {
+        console.log(res);
+        this.$router.push({ path: "/common/editBook" ,query:{info:JSON.stringify(res)}});
+      });
     },
     // handleCurrentChange(val){
     //   this.page = val

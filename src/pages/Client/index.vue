@@ -16,11 +16,19 @@
               <span class="menu_item" @click="menuChange(2)">新闻通知</span>
               <span class="menu_item" @click="menuChange(3)">活动</span>
               <span class="menu_item" @click="menuChange(4)">论坛</span>
-              <span class="menu_item" @click="menuChange(5)">
-                <i class="el-icon-user" style="font-size:18px"></i>
-                {{user.username}}
-                <el-tag effect="plain" size="mini">{{ user.iswriter|iswriter }}</el-tag>
-              </span>
+            </div>
+            <div class="mine">
+              <el-dropdown>
+                <span class="el-dropdown-link">
+                  <i class="el-icon-user" style="font-size:25px"></i>
+                    {{user.username}}
+                    <el-tag effect="plain" size="mini">{{ user.iswriter|iswriter }}</el-tag>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item><span @click="routerChange('Collent')">我的收藏</span></el-dropdown-item>
+                  <el-dropdown-item><span @click="routerChange('Mine')">我的作品</span></el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </div>
             <div class="exit" @click="exit">
               <i
@@ -49,8 +57,7 @@
 export default {
   data() {
     return {
-      user:{
-      },
+      user: {},
       menuList: [
         {
           name: "首页",
@@ -79,9 +86,9 @@ export default {
       ]
     };
   },
-  watch:{
-    $route(to,from){
-      this.changeActive(to.path)
+  watch: {
+    $route(to, from) {
+      this.changeActive(to.path);
     }
   },
   methods: {
@@ -91,15 +98,19 @@ export default {
     menuChange(num) {
       this.$router.push({ path: this.menuList[num].link });
     },
-    changeActive(path){
-      for(let i = 0;i<this.menuList.length;i++){
-        if(path === this.menuList[i].link){
+    routerChange(name){
+      console.log(name)
+      this.$router.push('/client/'+name)
+    },
+    changeActive(path) {
+      for (let i = 0; i < this.menuList.length; i++) {
+        if (path === this.menuList[i].link) {
           let btns = document.getElementsByClassName("menu_item");
           for (let j = 0; j < btns.length; j++) {
             btns[j].className = "menu_item";
           }
           btns[i].className = "menu_item active";
-          break
+          break;
         }
       }
     },
@@ -109,43 +120,42 @@ export default {
         method: "get"
       }).then(res => {
         console.log(res);
-        this.user = res
-      })
-    },
+        this.user = res;
+      });
+    }
   },
-  filters:{
-    iswriter(val){
-      if(val === 1){
-        return '作者'
-      }else if(val === -1){
-        return '普通用户'
-      }else if(val === 0){
-        return '审核中'
-      }else{
-        return '未登录'
+  filters: {
+    iswriter(val) {
+      if (val === 1) {
+        return "作者";
+      } else if (val === -1) {
+        return "普通用户";
+      } else if (val === 0) {
+        return "审核中";
+      } else {
+        return "未登录";
       }
     }
   },
   mounted() {
-    this.getUserInfo()
+    this.getUserInfo();
   },
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter(to, from, next) {
     next(instance => {
-      instance.changeActive(to.path)
-    })
-  },
+      instance.changeActive(to.path);
+    });
+  }
 };
 </script>
 <style lang="less" scoped>
-
 .main_page {
   position: relative;
   min-height: 830px;
   /deep/.el-container {
-  margin: 0px;
-  height: 100vh;
-}
-  /deep/.el-header{
+    margin: 0px;
+    height: 100vh;
+  }
+  /deep/.el-header {
     padding: 0px;
   }
   // height: 100vh;
@@ -158,7 +168,10 @@ export default {
       justify-content: space-between;
       padding: 0 20px;
       height: 100px;
-      background-image: linear-gradient(rgba(121, 136, 239, 0.5),rgba(121, 136, 239, 0));
+      background-image: linear-gradient(
+        rgba(121, 136, 239, 0.5),
+        rgba(121, 136, 239, 0)
+      );
       .icon {
         display: flex;
         .text {
@@ -172,7 +185,7 @@ export default {
       .handler {
         display: flex;
         .menu {
-          margin-right: 30px;
+          margin-right: 20px;
           .menu_item {
             cursor: pointer;
             font-size: 15px;
@@ -181,17 +194,26 @@ export default {
             line-height: 60px;
             white-space: nowrap;
             text-align: center;
-            /deep/.el-tag--plain{
-              background: none;
-              color: #fbf751;
-              border-color:#fbf88b;
-              margin-left: 5px;
-            }
+            
           }
           .active {
             color: #fcff5b;
             font-size: 20px;
           }
+        }
+        .mine{
+          line-height: 60px;
+          cursor: pointer;
+          margin-right: 10px;
+          /deep/.el-dropdown{
+            color: #fff;
+          }
+            /deep/.el-tag--plain {
+              background: none;
+              color: #fbf751;
+              border-color: #fbf88b;
+              margin-left: 5px;
+            }
         }
         .exit {
           line-height: 60px;

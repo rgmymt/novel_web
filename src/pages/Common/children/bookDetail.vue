@@ -251,6 +251,8 @@ export default {
         //overflow-y: auto;
         padding: 0.3rem;
         padding-bottom: 1.5rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
         .handleBar {
           // bottom: 0.5rem;
           // right: 0.5rem;
